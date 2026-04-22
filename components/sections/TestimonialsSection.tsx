@@ -104,26 +104,26 @@ export function TestimonialsSection() {
                 id="testimonial-evidence"
                 className="border-t border-white/10 px-3 pb-3 pt-3 sm:px-4 sm:pb-4 sm:pt-4"
               >
-                <div className="grid grid-cols-3 gap-2 md:gap-6">
+                <div className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-3 lg:gap-6">
                   {[1, 2, 3].map((num, i) => (
                     <MotionReveal key={`chat-${num}`} delay={i * 0.1}>
-                      <article className="glass-panel group relative flex h-full flex-col overflow-hidden rounded-[1.1rem] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(0,0,0,0.4)] sm:rounded-[1.75rem] sm:p-4">
-                        <div className="mb-2 flex items-center justify-between px-1 sm:mb-4 sm:px-0">
-                          <span className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[#d4af37] sm:text-[11px] sm:tracking-[0.3em]">
+                      <article className="glass-panel group relative flex min-w-[82vw] snap-center flex-col overflow-hidden rounded-[1.25rem] p-3 shadow-[0_24px_80px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(0,0,0,0.4)] sm:min-w-0 sm:rounded-[1.75rem] sm:p-4">
+                        <div className="mb-3 flex items-center justify-between px-1 sm:mb-4 sm:px-0">
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#d4af37] sm:text-[11px] sm:tracking-[0.3em]">
                             Prueba real
                           </span>
-                          <span className="hidden rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[10px] uppercase tracking-[0.18em] text-[#f5f0e6]/55 sm:inline-flex">
+                          <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[10px] uppercase tracking-[0.18em] text-[#f5f0e6]/55">
                             WhatsApp
                           </span>
                         </div>
 
-                        <div className="relative w-full flex-grow overflow-hidden rounded-[0.9rem] bg-black/30 sm:rounded-xl">
+                        <div className="relative w-full flex-grow overflow-hidden rounded-[1rem] bg-black/30 sm:rounded-xl">
                           <Image
                             src={`/chat${num}.jpg`}
                             alt={`Testimonio y comprobante de cliente ${num}`}
                             width={600}
                             height={1200}
-                            className="h-auto w-full object-contain object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                            className="h-auto max-h-[28rem] w-full object-contain object-top transition-transform duration-500 group-hover:scale-[1.02] sm:max-h-[34rem]"
                             quality={95}
                           />
                         </div>

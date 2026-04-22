@@ -64,10 +64,10 @@ export function BenefitsSection() {
                       className="sm:h-[26px] sm:w-[26px]"
                     />
                   </div>
-                  <h3 className="mt-4 text-sm font-semibold leading-tight tracking-tight text-white sm:mt-8 sm:text-xl lg:text-2xl">
+                  <h3 className="mt-4 text-[13px] font-semibold leading-tight tracking-tight text-white sm:mt-8 sm:text-xl lg:text-2xl">
                     {benefit.title}
                   </h3>
-                  <p className="mt-2 text-[11px] leading-4 text-[#f5f0e6]/72 sm:hidden">
+                  <p className="mt-2 text-[10px] leading-4 text-[#f5f0e6]/72 sm:hidden">
                     {benefit.mobileDescription}
                   </p>
                   <p className="mt-4 hidden flex-grow text-base leading-relaxed text-[#f5f0e6]/72 sm:block">
