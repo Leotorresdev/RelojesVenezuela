@@ -1,24 +1,23 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
-import { Watch, TrendingUp } from "lucide-react";
+import { Check, TrendingUp, Watch } from "lucide-react";
 
 import { MotionReveal } from "@/components/ui/MotionReveal";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { catalogProducts } from "@/lib/site";
 
-export function CatalogSection() {
+export const CatalogSection = memo(function CatalogSection() {
   return (
     <section id="catalog" className="relative px-2 py-20 lg:py-28">
-      {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-0 h-[1px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#d4af37]/20 to-transparent" />
         <div className="absolute right-0 top-20 h-64 w-64 rounded-full bg-[#d4af37]/5 blur-[80px]" />
         <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-[#d4af37]/5 blur-[80px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Header */}
         <MotionReveal className="mb-12">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
@@ -35,7 +34,7 @@ export function CatalogSection() {
               </motion.div>
 
               <MotionReveal delay={0.1}>
-                <h2 className="mt-5 font-heading text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+                <h2 className="mt-5 font-heading text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
                   Relojes para caballeros{" "}
                   <span className="text-[#d4af37]">que marcan la diferencia</span>
                 </h2>
@@ -49,13 +48,12 @@ export function CatalogSection() {
               </MotionReveal>
             </div>
 
-            {/* Stats */}
             <MotionReveal delay={0.2}>
               <div className="flex gap-6 lg:gap-10">
                 <div className="text-center lg:text-left">
                   <div className="flex items-center justify-center gap-2 lg:justify-start">
                     <TrendingUp size={20} className="text-[#d4af37]" />
-                    <span className="font-heading text-3xl font-bold text-white">
+                    <span className="font-heading text-3xl font-semibold text-white">
                       {catalogProducts.length}
                     </span>
                   </div>
@@ -66,11 +64,9 @@ export function CatalogSection() {
                 <div className="text-center lg:text-left">
                   <div className="flex items-center justify-center gap-2 lg:justify-start">
                     <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#d4af37]/20">
-                      <span className="text-[9px] font-bold text-[#d4af37]">✓</span>
+                      <Check size={12} className="text-[#d4af37]" strokeWidth={3} />
                     </div>
-                    <span className="font-heading text-3xl font-bold text-white">
-                      100%
-                    </span>
+                    <span className="font-heading text-3xl font-semibold text-white">100%</span>
                   </div>
                   <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/50">
                     Originales
@@ -81,7 +77,6 @@ export function CatalogSection() {
           </div>
         </MotionReveal>
 
-        {/* Products Grid */}
         <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {catalogProducts.map((product, index) => (
             <MotionReveal key={product.id} delay={index * 0.05}>
@@ -90,7 +85,6 @@ export function CatalogSection() {
           ))}
         </div>
 
-        {/* CTA Bottom */}
         <MotionReveal delay={0.4} className="mt-16 text-center">
           <div className="inline-flex items-center gap-3 rounded-2xl border border-[#d4af37]/20 bg-gradient-to-r from-[#d4af37]/10 via-[#d4af37]/5 to-[#d4af37]/10 px-8 py-5">
             <div className="flex -space-x-2">
@@ -111,4 +105,4 @@ export function CatalogSection() {
       </div>
     </section>
   );
-}
+});

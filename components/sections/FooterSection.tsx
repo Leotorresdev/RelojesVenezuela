@@ -1,17 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import { memo } from "react";
 import { motion } from "framer-motion";
 import {
-  MessageCircleMore,
   Camera,
-  Globe,
-  Send,
-  MapPin,
   Clock,
+  Globe,
+  Headset,
+  MapPin,
+  MessageCircleMore,
   ShieldCheck,
   Truck,
-  Headset,
 } from "lucide-react";
 
 import { siteConfig } from "@/lib/site";
@@ -19,37 +19,34 @@ import { siteConfig } from "@/lib/site";
 const socialLinks = [
   { name: "Instagram", icon: Camera, href: "#" },
   { name: "Web", icon: Globe, href: "#" },
-  { name: "Contacto", icon: Send, href: "#" },
-];
+  { name: "Contacto", icon: MessageCircleMore, href: siteConfig.whatsappUrl },
+] as const;
 
 const quickLinks = [
   { name: "Inicio", href: "#hero" },
   { name: "Catálogo", href: "#catalog" },
   { name: "Opiniones", href: "#testimonials" },
   { name: "Contacto", href: "#contact" },
-];
+] as const;
 
 const trustBadges = [
   { icon: ShieldCheck, text: "Autenticidad garantizada" },
   { icon: Truck, text: "Envío asegurado" },
   { icon: Headset, text: "Soporte dedicado" },
-];
+] as const;
 
-export function FooterSection() {
+export const FooterSection = memo(function FooterSection() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#0a0908] via-[#0f0e0c] to-[#060606] px-4 py-12 sm:px-6 lg:px-12">
-      {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-[#d4af37]/3 blur-[100px]" />
         <div className="absolute -right-32 -bottom-32 h-64 w-64 rounded-full bg-[#d4af37]/3 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Main footer content */}
         <div className="grid gap-10 lg:grid-cols-4 lg:gap-12">
-          {/* Brand column */}
           <div className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -63,6 +60,7 @@ export function FooterSection() {
                   alt="Relojes Venezuela"
                   fill
                   className="rounded-xl object-cover"
+                  sizes="56px"
                 />
               </div>
               <div>
@@ -70,17 +68,15 @@ export function FooterSection() {
                   {siteConfig.brandName}
                 </p>
                 <p className="mt-2 max-w-sm text-sm leading-6 text-[#f5f0e6]/65">
-                  Curaduría de relojes con lenguaje visual premium. Atención directa
-                  por WhatsApp y una experiencia de compra sólida para una marca
-                  que quiere verse seria y confiable.
+                  Curaduría de relojes con lenguaje visual premium. Atención directa por WhatsApp y una experiencia de compra sólida para una marca que quiere verse seria y confiable.
                 </p>
               </div>
             </motion.div>
 
-            {/* Social links */}
             <div className="mt-6 flex items-center gap-3">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
+
                 return (
                   <a
                     key={social.name}
@@ -92,17 +88,9 @@ export function FooterSection() {
                   </a>
                 );
               })}
-              <a
-                href={siteConfig.whatsappUrl}
-                className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-[#f5f0e6]/60 transition-all duration-300 hover:border-[#25D366]/40 hover:bg-[#25D366]/10 hover:text-[#25D366]"
-                aria-label="WhatsApp"
-              >
-                <MessageCircleMore size={18} className="transition-transform group-hover:scale-110" />
-              </a>
             </div>
           </div>
 
-          {/* Quick links column */}
           <div>
             <h4 className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4af37]">
               Navegación
@@ -121,7 +109,6 @@ export function FooterSection() {
             </ul>
           </div>
 
-          {/* Contact column */}
           <div>
             <h4 className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4af37]">
               Contacto
@@ -138,24 +125,20 @@ export function FooterSection() {
               </li>
               <li className="flex items-center gap-3">
                 <Clock size={16} className="text-[#d4af37]" />
-                <span className="text-sm text-[#f5f0e6]/60">
-                  Atención 24/7
-                </span>
+                <span className="text-sm text-[#f5f0e6]/60">Atención 24/7</span>
               </li>
               <li className="flex items-center gap-3">
                 <MapPin size={16} className="text-[#d4af37]" />
-                <span className="text-sm text-[#f5f0e6]/60">
-                  Envíos nacionales
-                </span>
+                <span className="text-sm text-[#f5f0e6]/60">Envíos nacionales</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Trust badges */}
         <div className="mt-10 flex flex-wrap items-center gap-4 border-y border-white/5 py-6">
           {trustBadges.map((badge) => {
             const Icon = badge.icon;
+
             return (
               <div
                 key={badge.text}
@@ -168,24 +151,26 @@ export function FooterSection() {
           })}
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-center sm:flex-row sm:text-left">
           <p className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40">
             © {currentYear} {siteConfig.brandName}. Todos los derechos reservados.
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            <a href="#" className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40 transition-colors hover:text-[#d4af37]">
+            <a
+              href="#"
+              className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40 transition-colors hover:text-[#d4af37]"
+            >
               Términos
             </a>
-            <a href="#" className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40 transition-colors hover:text-[#d4af37]">
+            <a
+              href="#"
+              className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40 transition-colors hover:text-[#d4af37]"
+            >
               Privacidad
-            </a>
-            <a href="#" className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40 transition-colors hover:text-[#d4af37]">
-              Cookies
             </a>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+});

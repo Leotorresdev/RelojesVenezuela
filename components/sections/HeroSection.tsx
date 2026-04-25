@@ -1,43 +1,23 @@
 "use client";
 
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, BadgeCheck, PackageCheck, ShieldCheck, Watch } from "lucide-react";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useEffectEvent, useState } from "react";
 
-import { MotionReveal } from "@/components/ui/MotionReveal";
 import { HeroSectionProps } from "@/interfaces/Hero";
+import { MotionReveal } from "@/components/ui/MotionReveal";
 
 const metrics = [
   { label: "Modelos exclusivos", value: "15+", icon: Watch },
   { label: "Entrega verificada", value: "24/7", icon: ShieldCheck },
   { label: "Clientes satisfechos", value: "92%", icon: BadgeCheck },
-];
+] as const;
 
-const floatingVariants = {
-  float: {
-    y: [0, -12, 0],
-    transition: {
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut" as const,
-    },
-  },
-};
-
-const glowVariants = {
-  pulse: {
-    opacity: [0.3, 0.6, 0.3],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut" as const,
-    },
-  },
-};
+const IMAGE_TRANSITION_INTERVAL = 4000;
 
 export function HeroSection({
-  eyebrow = "Edicion Limitada 2026",
+  eyebrow = "Edición Limitada 2026",
   title,
   headline,
   description,
@@ -48,50 +28,48 @@ export function HeroSection({
   imageAlt,
 }: HeroSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
 
   const displayImages = images.length > 0 ? images : imageSrc ? [imageSrc] : [];
+  const shouldAnimateGallery = displayImages.length > 1 && !prefersReducedMotion;
+  const advanceImage = useEffectEvent(() => {
+    setCurrentIndex((prev) => (prev + 1) % displayImages.length);
+  });
 
   useEffect(() => {
-    if (displayImages.length <= 1) return;
+    if (!shouldAnimateGallery) {
+      return;
+    }
+
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % displayImages.length);
-    }, 4000);
+      advanceImage();
+    }, IMAGE_TRANSITION_INTERVAL);
+
     return () => clearInterval(interval);
-  }, [displayImages.length]);
+  }, [shouldAnimateGallery]);
 
   return (
     <section
       id="hero"
       className="relative mt-4 overflow-hidden rounded-[2.5rem] px-0 py-0 sm:px-0 lg:mt-8"
     >
-      {/* Background gradient orbs */}
-      <motion.div
-        variants={glowVariants}
-        animate="pulse"
-        className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#d4af37]/20 blur-[120px]"
-      />
-      <motion.div
-        variants={glowVariants}
-        animate="pulse"
-        className="absolute -right-32 -bottom-32 h-96 w-96 rounded-full bg-[#d4af37]/15 blur-[120px]"
-      />
+      <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#d4af37]/20 blur-[120px]" />
+      <div className="absolute -right-32 -bottom-32 h-96 w-96 rounded-full bg-[#d4af37]/15 blur-[120px]" />
 
       <div className="relative grid items-stretch gap-0 lg:grid-cols-2">
-        {/* Content Side */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative flex flex-col justify-center bg-gradient-to-br from-[#0a0a0a]/95 via-[#0f0e0c]/90 to-[#1a1814]/85 px-6 py-12 sm:px-10 sm:py-16 lg:px-12 lg:py-20"
         >
-          {/* Decorative line */}
           <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-[#d4af37]/60 via-[#d4af37]/20 to-transparent" />
 
           <MotionReveal>
             <div className="inline-flex items-center gap-2 self-start rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-4 py-1.5">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#d4af37] opacity-60"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#d4af37]"></span>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#d4af37] opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#d4af37]" />
               </span>
               <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-[#d4af37]">
                 {eyebrow}
@@ -100,7 +78,7 @@ export function HeroSection({
           </MotionReveal>
 
           <MotionReveal delay={0.1}>
-            <h1 className="mt-6 max-w-xl font-heading text-5xl font-bold leading-[0.95] text-white sm:mt-8 sm:text-7xl lg:text-8xl">
+            <h1 className="mt-6 max-w-xl font-heading text-5xl font-semibold leading-[0.95] text-white sm:mt-8 sm:text-7xl lg:text-8xl">
               {title}
               <span className="mt-1 block bg-gradient-to-r from-[#d4af37] via-[#e8c65a] to-[#d4af37] bg-clip-text text-transparent">
                 {headline}
@@ -135,20 +113,21 @@ export function HeroSection({
                 href="#catalog"
                 className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.04] px-8 py-4.5 text-center text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f5f0e6] backdrop-blur-sm transition-all hover:border-[#d4af37]/40 hover:bg-[#d4af37]/5 hover:text-[#d4af37] sm:w-auto sm:px-9 sm:text-sm sm:tracking-[0.32em]"
               >
-                Explorar coleccion
+                Explorar colección
               </a>
             </div>
           </MotionReveal>
 
           <MotionReveal delay={0.4}>
             <div className="mt-12 grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
-              {metrics.map((metric, index) => {
+              {metrics.map((metric) => {
                 const Icon = metric.icon;
+
                 return (
                   <div key={metric.label} className="group">
                     <div className="mb-2 flex items-center justify-center gap-2 text-[#d4af37] transition-colors group-hover:text-[#e8c65a]">
                       <Icon size={20} strokeWidth={1.5} />
-                      <span className="font-heading text-3xl font-bold text-white sm:text-4xl">
+                      <span className="font-heading text-3xl font-semibold text-white sm:text-4xl">
                         {metric.value}
                       </span>
                     </div>
@@ -162,11 +141,16 @@ export function HeroSection({
           </MotionReveal>
         </motion.div>
 
-        {/* Image Side */}
         <MotionReveal delay={0.2} className="relative hidden lg:block">
           <motion.div
-            variants={floatingVariants}
-            animate="float"
+            initial={{ y: 0 }}
+            animate={prefersReducedMotion ? { y: 0 } : { y: -12 }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+            }}
             className="relative h-full min-h-[600px] overflow-hidden rounded-r-[2.5rem]"
           >
             {displayImages.map((src, index) => (
@@ -179,13 +163,13 @@ export function HeroSection({
                   index === currentIndex ? "opacity-100" : "opacity-0"
                 }`}
                 priority={index === 0}
+                sizes="(max-width: 1024px) 0vw, 50vw"
+                quality={86}
               />
             ))}
 
-            {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-transparent to-black/20" />
 
-            {/* Floating badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -198,7 +182,7 @@ export function HeroSection({
                     <BadgeCheck size={16} className="text-[#d4af37]" />
                   </div>
                   <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4af37]">
-                    Garantia Premium
+                    Garantía Premium
                   </span>
                 </div>
 
@@ -216,7 +200,7 @@ export function HeroSection({
                       <PackageCheck size={12} className="text-[#d4af37]" />
                     </div>
                     <span className="text-[11px] tracking-[0.15em]">
-                      Envio asegurado 24/7
+                      Envío asegurado 24/7
                     </span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-[#f5f0e6]/85">
@@ -229,12 +213,10 @@ export function HeroSection({
                   </div>
                 </div>
 
-                {/* Decorative bottom line */}
                 <div className="mt-4 h-[1px] w-full bg-gradient-to-r from-[#d4af37]/40 to-transparent" />
               </div>
             </motion.div>
 
-            {/* Corner accent */}
             <div className="absolute left-0 top-0 h-32 w-32 bg-gradient-to-br from-[#d4af37]/10 to-transparent" />
           </motion.div>
         </MotionReveal>

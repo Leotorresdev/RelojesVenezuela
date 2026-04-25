@@ -1,7 +1,8 @@
 import { CatalogItem } from "@/interfaces/Catalog";
 
 export const WHATSAPP_NUMBER = "584220183181";
-const DEFAULT_WHATSAPP_TEXT = "Hola! Vengo de su Pagina Web y me gustaría consultar por este reloj";
+const DEFAULT_WHATSAPP_TEXT =
+  "Hola. Vengo de su página web y me gustaría consultar por este reloj.";
 
 export const siteConfig = {
   brandName: "Relojes Venezuela",
@@ -108,18 +109,18 @@ export const catalogProducts: CatalogItem[] = [
     originalPrice: 45,
     imageUrl: "/modelos/modelo13.jpg",
   },
-   {
+  {
     id: "modelo-14",
     name: "Curren 8476",
     price: 27.99,
     originalPrice: 35,
-    imageUrl: "/modelos/modelo15.jpg",
+    imageUrl: "/modelos/modelo14.jpg",
   },
-   {
+  {
     id: "modelo-15",
     name: "Curren 8411",
     price: 27.99,
     originalPrice: 35,
-    imageUrl: "/modelos/modelo16.jpg",
+    imageUrl: "/modelos/modelo15.jpg",
   },
 ];

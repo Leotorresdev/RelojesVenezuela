@@ -1,24 +1,21 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import { Bodoni_Moda, Newsreader } from "next/font/google";
+import { Jost } from "next/font/google";
+
 import { cn } from "@/lib/utils";
 
-const newsreader = Newsreader({
+import "./globals.css";
+
+const jost = Jost({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight: ["400", "500", "600"],
-});
-
-const bodoni = Bodoni_Moda({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Relojes Venezuela",
+  title: "Relojes Venezuela | Relojes Elegantes y Accesibles",
   description:
-    "Relojes originales, elegantes y accesibles en toda Venezuela.",
+    "Descubre nuestra colección de relojes originales, elegantes y accesibles. Envíos seguros a toda Venezuela.",
 };
 
 export default function RootLayout({
@@ -27,16 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="es"
-      className={cn(
-        "h-full",
-        "antialiased",
-        "font-sans",
-        newsreader.variable,
-        bodoni.variable
-      )}
-    >
+    <html lang="es" className={cn("h-full", "antialiased", "font-sans", jost.variable)}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
