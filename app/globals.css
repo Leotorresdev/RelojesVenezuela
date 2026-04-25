@@ -185,7 +185,7 @@
   }
 
   .section-label {
-    @apply text-[11px] font-semibold uppercase tracking-[0.36em] text-[#d4af37];
+    @apply text-[10px] font-semibold uppercase tracking-[0.32em] text-[#d4af37];
   }
 
   .glass-panel {
@@ -203,5 +203,20 @@
 
   .mobile-nav-scroll::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Gold gradient text utility */
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-[#d4af37] via-[#e8c65a] to-[#d4af37] bg-clip-text text-transparent;
+  }
+
+  /* Subtle glow effect */
+  .glow-gold {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+  }
+
+  /* Smooth focus ring */
+  .focus-gold {
+    @apply focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20 focus:ring-offset-2 focus:ring-offset-[#0a0908];
   }
 }

@@ -1,49 +1,189 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  MessageCircleMore,
+  Camera,
+  Globe,
+  Send,
+  MapPin,
+  Clock,
+  ShieldCheck,
+  Truck,
+  Headset,
+} from "lucide-react";
+
 import { siteConfig } from "@/lib/site";
 
+const socialLinks = [
+  { name: "Instagram", icon: Camera, href: "#" },
+  { name: "Web", icon: Globe, href: "#" },
+  { name: "Contacto", icon: Send, href: "#" },
+];
+
+const quickLinks = [
+  { name: "Inicio", href: "#hero" },
+  { name: "Catálogo", href: "#catalog" },
+  { name: "Opiniones", href: "#testimonials" },
+  { name: "Contacto", href: "#contact" },
+];
+
+const trustBadges = [
+  { icon: ShieldCheck, text: "Autenticidad garantizada" },
+  { icon: Truck, text: "Envío asegurado" },
+  { icon: Headset, text: "Soporte dedicado" },
+];
+
 export function FooterSection() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-white/10 px-4 py-10 sm:px-6 lg:px-12">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-        <div className="flex items-center gap-4">
-          <div className="relative h-12 w-12 overflow-hidden rounded-2xl border border-[#d4af37]/20 bg-white/5">
-            <Image
-              src={siteConfig.iconPath}
-              alt="Icono de Relojes  Venezuela"
-              fill
-              className="object-cover"
-            />
+    <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#0a0908] via-[#0f0e0c] to-[#060606] px-4 py-12 sm:px-6 lg:px-12">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-[#d4af37]/3 blur-[100px]" />
+        <div className="absolute -right-32 -bottom-32 h-64 w-64 rounded-full bg-[#d4af37]/3 blur-[100px]" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl">
+        {/* Main footer content */}
+        <div className="grid gap-10 lg:grid-cols-4 lg:gap-12">
+          {/* Brand column */}
+          <div className="lg:col-span-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-start gap-4"
+            >
+              <div className="relative h-14 w-14 overflow-hidden rounded-2xl border border-[#d4af37]/25 bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 p-0.5">
+                <Image
+                  src={siteConfig.iconPath}
+                  alt="Relojes Venezuela"
+                  fill
+                  className="rounded-xl object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.34em] text-[#d4af37]">
+                  {siteConfig.brandName}
+                </p>
+                <p className="mt-2 max-w-sm text-sm leading-6 text-[#f5f0e6]/65">
+                  Curaduría de relojes con lenguaje visual premium. Atención directa
+                  por WhatsApp y una experiencia de compra sólida para una marca
+                  que quiere verse seria y confiable.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Social links */}
+            <div className="mt-6 flex items-center gap-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-[#f5f0e6]/60 transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10 hover:text-[#d4af37]"
+                    aria-label={social.name}
+                  >
+                    <Icon size={18} className="transition-transform group-hover:scale-110" />
+                  </a>
+                );
+              })}
+              <a
+                href={siteConfig.whatsappUrl}
+                className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-[#f5f0e6]/60 transition-all duration-300 hover:border-[#25D366]/40 hover:bg-[#25D366]/10 hover:text-[#25D366]"
+                aria-label="WhatsApp"
+              >
+                <MessageCircleMore size={18} className="transition-transform group-hover:scale-110" />
+              </a>
+            </div>
           </div>
+
+          {/* Quick links column */}
           <div>
-            <p className="text-sm uppercase tracking-[0.34em] text-[#d4af37]">
-              {siteConfig.brandName}
-            </p>
-            <p className="mt-2 max-w-md text-sm leading-6 text-[#f5f0e6]/60">
-              Curaduria de relojes con lenguaje visual premium, atencion directa
-              por WhatsApp y una experiencia de compra mas solida para una marca
-              que quiere verse seria.
-            </p>
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4af37]">
+              Navegación
+            </h4>
+            <ul className="mt-4 space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-[#f5f0e6]/60 transition-colors hover:text-[#d4af37]"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact column */}
+          <div>
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4af37]">
+              Contacto
+            </h4>
+            <ul className="mt-4 space-y-3">
+              <li className="flex items-start gap-3">
+                <MessageCircleMore size={16} className="mt-0.5 text-[#d4af37]" />
+                <a
+                  href={siteConfig.whatsappUrl}
+                  className="text-sm text-[#f5f0e6]/60 transition-colors hover:text-[#d4af37]"
+                >
+                  WhatsApp directo
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Clock size={16} className="text-[#d4af37]" />
+                <span className="text-sm text-[#f5f0e6]/60">
+                  Atención 24/7
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <MapPin size={16} className="text-[#d4af37]" />
+                <span className="text-sm text-[#f5f0e6]/60">
+                  Envíos nacionales
+                </span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 text-sm text-[#f5f0e6]/60 lg:items-end">
-          <div className="flex flex-wrap gap-x-6 gap-y-2 uppercase tracking-[0.18em]">
-            <a href="#hero" className="transition hover:text-[#d4af37]">
-              Inicio
+        {/* Trust badges */}
+        <div className="mt-10 flex flex-wrap items-center gap-4 border-y border-white/5 py-6">
+          {trustBadges.map((badge) => {
+            const Icon = badge.icon;
+            return (
+              <div
+                key={badge.text}
+                className="flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2"
+              >
+                <Icon size={16} className="text-[#d4af37]" />
+                <span className="text-xs text-[#f5f0e6]/70">{badge.text}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-center sm:flex-row sm:text-left">
+          <p className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40">
+            © {currentYear} {siteConfig.brandName}. Todos los derechos reservados.
+          </p>
+          <div className="flex flex-wrap items-center gap-6">
+            <a href="#" className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40 transition-colors hover:text-[#d4af37]">
+              Términos
             </a>
-            <a href="#catalog" className="transition hover:text-[#d4af37]">
-              Catalogo
+            <a href="#" className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40 transition-colors hover:text-[#d4af37]">
+              Privacidad
             </a>
-            <a href="#testimonials" className="transition hover:text-[#d4af37]">
-              Opiniones
-            </a>
-            <a href="#contact" className="transition hover:text-[#d4af37]">
-              Contacto
+            <a href="#" className="text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/40 transition-colors hover:text-[#d4af37]">
+              Cookies
             </a>
           </div>
-          <p className="text-xs uppercase tracking-[0.18em]">
-            © 2026 Relojes Venezuela. Catalogo premium por WhatsApp.
-          </p>
         </div>
       </div>
     </footer>

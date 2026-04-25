@@ -1,35 +1,113 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Watch, TrendingUp } from "lucide-react";
+
 import { MotionReveal } from "@/components/ui/MotionReveal";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { catalogProducts } from "@/lib/site";
 
 export function CatalogSection() {
   return (
-    <section id="catalog" className="px-2 py-18 lg:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-6">
-          <MotionReveal className="max-w-full">
-            <p className="section-label">Catalogo</p>
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              <h2 className="text-3xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-[3.5rem] xl:text-4xl md:whitespace-nowrap">
-                Todos los modelos disponibles para caballeros
-              </h2>
-              <span className="inline-flex items-center rounded-full border border-[#d4af37]/25 bg-[#d4af37]/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#f5f0e6]/78 sm:px-4 sm:py-1.5 sm:text-[11px]">
-                15 modelos
-              </span>
-            </div>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-[#f5f0e6]/65 sm:text-base sm:leading-7">
-              En móvil verás una grilla más compacta para comparar referencias más rápido sin recorrer una lista tan larga.
-            </p>
-          </MotionReveal>
-        </div>
+    <section id="catalog" className="relative px-2 py-20 lg:py-28">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute left-1/2 top-0 h-[1px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#d4af37]/20 to-transparent" />
+        <div className="absolute right-0 top-20 h-64 w-64 rounded-full bg-[#d4af37]/5 blur-[80px]" />
+        <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-[#d4af37]/5 blur-[80px]" />
+      </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="relative mx-auto max-w-7xl">
+        {/* Header */}
+        <MotionReveal className="mb-12">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-2 rounded-full border border-[#d4af37]/25 bg-[#d4af37]/10 px-4 py-1.5"
+              >
+                <Watch size={14} className="text-[#d4af37]" />
+                <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#d4af37]">
+                  Catálogo Exclusivo
+                </p>
+              </motion.div>
+
+              <MotionReveal delay={0.1}>
+                <h2 className="mt-5 font-heading text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+                  Relojes para caballeros{" "}
+                  <span className="text-[#d4af37]">que marcan la diferencia</span>
+                </h2>
+              </MotionReveal>
+
+              <MotionReveal delay={0.15}>
+                <p className="mt-4 max-w-xl text-base leading-7 text-[#f5f0e6]/70 sm:text-lg sm:leading-8">
+                  Cada pieza ha sido seleccionada por su elegancia, calidad y presencia.
+                  Explora nuestra colección y encuentra el reloj que refleja tu estilo.
+                </p>
+              </MotionReveal>
+            </div>
+
+            {/* Stats */}
+            <MotionReveal delay={0.2}>
+              <div className="flex gap-6 lg:gap-10">
+                <div className="text-center lg:text-left">
+                  <div className="flex items-center justify-center gap-2 lg:justify-start">
+                    <TrendingUp size={20} className="text-[#d4af37]" />
+                    <span className="font-heading text-3xl font-bold text-white">
+                      {catalogProducts.length}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/50">
+                    Modelos disponibles
+                  </p>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="flex items-center justify-center gap-2 lg:justify-start">
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#d4af37]/20">
+                      <span className="text-[9px] font-bold text-[#d4af37]">✓</span>
+                    </div>
+                    <span className="font-heading text-3xl font-bold text-white">
+                      100%
+                    </span>
+                  </div>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-[#f5f0e6]/50">
+                    Originales
+                  </p>
+                </div>
+              </div>
+            </MotionReveal>
+          </div>
+        </MotionReveal>
+
+        {/* Products Grid */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {catalogProducts.map((product, index) => (
-            <MotionReveal key={product.id} delay={index * 0.08}>
+            <MotionReveal key={product.id} delay={index * 0.05}>
               <ProductCard product={product} />
             </MotionReveal>
           ))}
         </div>
+
+        {/* CTA Bottom */}
+        <MotionReveal delay={0.4} className="mt-16 text-center">
+          <div className="inline-flex items-center gap-3 rounded-2xl border border-[#d4af37]/20 bg-gradient-to-r from-[#d4af37]/10 via-[#d4af37]/5 to-[#d4af37]/10 px-8 py-5">
+            <div className="flex -space-x-2">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#0f0e0c] bg-[#d4af37]/20"
+                >
+                  <span className="text-[8px] font-bold text-[#d4af37]">{i}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-[#f5f0e6]/80">
+              <span className="font-semibold text-[#d4af37]">+500 clientes</span> ya encontraron su reloj ideal
+            </p>
+          </div>
+        </MotionReveal>
       </div>
     </section>
   );

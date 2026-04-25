@@ -101,3 +101,5 @@ const contarVocales = (texto) => {
 console.log(contarVocales("Hola Mundo"))  // 4
 console.log(contarVocales("JavaScript"))   // 3
 console.log(contarVocales("AEIOU"))        // 5
+
+const esPar = ()
