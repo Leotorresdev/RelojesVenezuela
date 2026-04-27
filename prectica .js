@@ -102,4 +102,7 @@ console.log(contarVocales("Hola Mundo"))  // 4
 console.log(contarVocales("JavaScript"))   // 3
 console.log(contarVocales("AEIOU"))        // 5
 
-const esPar = ()
+//es par o impar
+const esPar = (numero) => {
+    return numero % 2 === 0;
+}

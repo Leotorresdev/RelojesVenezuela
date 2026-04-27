@@ -14,7 +14,7 @@ const metrics = [
   { label: "Clientes satisfechos", value: "92%", icon: BadgeCheck },
 ] as const;
 
-const IMAGE_TRANSITION_INTERVAL = 4000;
+const IMAGE_TRANSITION_INTERVAL = 2000;
 
 export function HeroSection({
   eyebrow = "Edición Limitada 2026",
@@ -32,9 +32,6 @@ export function HeroSection({
 
   const displayImages = images.length > 0 ? images : imageSrc ? [imageSrc] : [];
   const shouldAnimateGallery = displayImages.length > 1 && !prefersReducedMotion;
-  const advanceImage = useEffectEvent(() => {
-    setCurrentIndex((prev) => (prev + 1) % displayImages.length);
-  });
 
   useEffect(() => {
     if (!shouldAnimateGallery) {
@@ -42,11 +39,11 @@ export function HeroSection({
     }
 
     const interval = setInterval(() => {
-      advanceImage();
+      setCurrentIndex((prev) => (prev + 1) % displayImages.length);
     }, IMAGE_TRANSITION_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [shouldAnimateGallery]);
+  }, [shouldAnimateGallery, displayImages.length]);
 
   return (
     <section
@@ -154,19 +151,48 @@ export function HeroSection({
             className="relative h-full min-h-[600px] overflow-hidden rounded-r-[2.5rem]"
           >
             {displayImages.map((src, index) => (
-              <Image
+              <motion.div
                 key={src}
-                src={src}
-                alt={`${imageAlt} - Imagen ${index + 1}`}
-                fill
-                className={`object-cover object-center transition-opacity duration-1000 ${
-                  index === currentIndex ? "opacity-100" : "opacity-0"
-                }`}
-                priority={index === 0}
-                sizes="(max-width: 1024px) 0vw, 50vw"
-                quality={86}
-              />
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{
+                  opacity: index === currentIndex ? 1 : 0,
+                  scale: index === currentIndex ? 1 : 1.05,
+                }}
+                transition={{
+                  opacity: { duration: 1.2, ease: "easeInOut" },
+                  scale: { duration: 2, ease: "easeOut" },
+                }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={src}
+                  alt={`${imageAlt} - Imagen ${index + 1}`}
+                  fill
+                  className="object-cover object-center"
+                  priority={index === 0}
+                  sizes="(max-width: 1024px) 0vw, 50vw"
+                  quality={86}
+                />
+              </motion.div>
             ))}
+
+            {/* Indicadores de posición */}
+            {displayImages.length > 1 && (
+              <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2 rounded-full bg-black/40 px-4 py-2 backdrop-blur-sm">
+                {displayImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      index === currentIndex
+                        ? "w-8 bg-[#d4af37]"
+                        : "w-1.5 bg-white/40 hover:bg-white/70"
+                    }`}
+                    aria-label={`Ver imagen ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
 
             <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-transparent to-black/20" />
 

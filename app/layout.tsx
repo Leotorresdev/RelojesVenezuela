@@ -13,7 +13,7 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "Relojes Venezuela | Relojes Elegantes y Accesibles",
+  title: "Relojes Venezuela",
   description:
     "Descubre nuestra colección de relojes originales, elegantes y accesibles. Envíos seguros a toda Venezuela.",
 };

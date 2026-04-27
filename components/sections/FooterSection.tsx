@@ -29,12 +29,6 @@ const quickLinks = [
   { name: "Contacto", href: "#contact" },
 ] as const;
 
-const trustBadges = [
-  { icon: ShieldCheck, text: "Autenticidad garantizada" },
-  { icon: Truck, text: "Envío asegurado" },
-  { icon: Headset, text: "Soporte dedicado" },
-] as const;
-
 export const FooterSection = memo(function FooterSection() {
   const currentYear = new Date().getFullYear();
 
@@ -133,22 +127,6 @@ export const FooterSection = memo(function FooterSection() {
               </li>
             </ul>
           </div>
-        </div>
-
-        <div className="mt-10 flex flex-wrap items-center gap-4 border-y border-white/5 py-6">
-          {trustBadges.map((badge) => {
-            const Icon = badge.icon;
-
-            return (
-              <div
-                key={badge.text}
-                className="flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2"
-              >
-                <Icon size={16} className="text-[#d4af37]" />
-                <span className="text-xs text-[#f5f0e6]/70">{badge.text}</span>
-              </div>
-            );
-          })}
         </div>
 
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-center sm:flex-row sm:text-left">

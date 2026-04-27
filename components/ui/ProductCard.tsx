@@ -37,12 +37,12 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className="group relative"
+      className="group relative flex h-full"
     >
       <div className="absolute -inset-0.5 rounded-[1.5rem] bg-gradient-to-br from-[#d4af37]/0 via-[#d4af37]/20 to-[#d4af37]/0 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
 
-      <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-b from-[#141310] via-[#0f0e0c] to-[#0a0908] shadow-xl transition-all duration-500 group-hover:border-[#d4af37]/30 group-hover:shadow-[0_20px_60px_rgba(212,175,55,0.15)]">
-        <div className="relative mx-4 mt-4 aspect-[4/4.5] overflow-hidden rounded-[1.1rem]">
+      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-b from-[#141310] via-[#0f0e0c] to-[#0a0908] shadow-xl transition-all duration-500 group-hover:border-[#d4af37]/30 group-hover:shadow-[0_20px_60px_rgba(212,175,55,0.15)]">
+        <div className="relative mx-4 mt-4 aspect-[4/4.5] w-full overflow-hidden rounded-[1.1rem]">
           <Image
             src={product.imageUrl}
             alt={product.name}
@@ -81,7 +81,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
           </div>
         </div>
 
-        <div className="px-4 pb-4 pt-3">
+        <div className="flex flex-col flex-grow px-4 pb-4 pt-3">
           <div className="mb-2.5 flex items-center gap-1.5">
             <div className="h-[1px] w-6 bg-gradient-to-r from-[#d4af37]/50 to-transparent" />
             <span className="text-[8px] font-semibold uppercase tracking-[0.28em] text-[#d4af37]/80">
@@ -93,7 +93,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
             {product.name}
           </h3>
 
-          <div className="mt-3.5 flex items-end justify-between">
+          <div className="mt-auto flex items-end justify-between pt-3.5">
             <div className="flex flex-col">
               {discount > 0 && (
                 <span className="text-[9px] font-medium text-[#f5f0e6]/35 line-through">

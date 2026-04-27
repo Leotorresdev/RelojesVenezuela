@@ -41,9 +41,6 @@ export function SiteHeader() {
               <span className="block text-[10px] uppercase tracking-[0.34em] text-[#d4af37]">
                 {siteConfig.brandName}
               </span>
-              <span className="block text-[9px] uppercase tracking-[0.2em] text-[#f5f0e6]/40">
-                Edición 2026
-              </span>
             </div>
           </motion.a>
 
