@@ -7,11 +7,8 @@ import {
   Camera,
   Clock,
   Globe,
-  Headset,
   MapPin,
   MessageCircleMore,
-  ShieldCheck,
-  Truck,
 } from "lucide-react";
 
 import { siteConfig } from "@/lib/site";

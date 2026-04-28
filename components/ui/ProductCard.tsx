@@ -96,7 +96,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
           <div className="mt-auto flex items-end justify-between pt-3.5">
             <div className="flex flex-col">
               {discount > 0 && (
-                <span className="text-[9px] font-medium text-[#f5f0e6]/35 line-through">
+                <span className="text-[14px] font-medium text-[#f5f0e6]/35 line-through">
                   {formatPrice(product.originalPrice)}
                 </span>
               )}
