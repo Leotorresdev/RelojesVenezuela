@@ -153,7 +153,7 @@ export const TestimonialsSection = memo(function TestimonialsSection() {
               <motion.span
                 animate={{ rotate: showEvidence ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-[#f5f0e6]/75"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/6 text-[#f5f0e6]/75"
               >
                 <ChevronDown className="h-5 w-5" />
               </motion.span>

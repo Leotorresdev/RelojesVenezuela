@@ -128,7 +128,7 @@ export function CtaSection() {
                 </p>
 
                 <div className="mt-8 space-y-4">
-                  <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] px-5 py-4">
+                  <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/2 px-5 py-4">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d4af37]/20">
                         <Clock size={18} className="text-[#d4af37]" />
@@ -143,7 +143,7 @@ export function CtaSection() {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] px-5 py-4">
+                  <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/2 px-5 py-4">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d4af37]/20">
                         <MessageCircle size={18} className="text-[#d4af37]" />

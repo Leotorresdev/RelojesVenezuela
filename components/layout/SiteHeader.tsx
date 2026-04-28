@@ -37,7 +37,7 @@ export function SiteHeader() {
                 sizes="80px"
               />
             </div>
-            <div className="hidden sm:block">
+            <div className="block">
               <span className="block text-[10px] uppercase tracking-[0.34em] text-[#d4af37]">
                 {siteConfig.brandName}
               </span>
@@ -104,13 +104,14 @@ export function SiteHeader() {
           exit={{ opacity: 0, height: 0 }}
           className="border-t border-white/5 bg-[#090909]/95 px-4 py-6 md:hidden"
         >
+
           <nav className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="rounded-xl px-4 py-3.5 text-sm font-medium uppercase tracking-[0.24em] text-[#f5f0e6]/70 transition-colors hover:bg-white/[0.02] hover:text-[#d4af37]"
+                className="rounded-xl px-4 py-3.5 text-sm font-medium uppercase tracking-[0.24em] text-[#f5f0e6]/70 transition-colors hover:bg-white/2 hover:text-[#d4af37]"
               >
                 {link.label}
               </a>

@@ -75,7 +75,7 @@ export const FooterSection = memo(function FooterSection() {
                   <a
                     key={social.name}
                     href={social.href}
-                    className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-[#f5f0e6]/60 transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10 hover:text-[#d4af37]"
+                    className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/2 text-[#f5f0e6]/60 transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/10 hover:text-[#d4af37]"
                     aria-label={social.name}
                   >
                     <Icon size={18} className="transition-transform group-hover:scale-110" />

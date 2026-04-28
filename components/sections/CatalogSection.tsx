@@ -63,25 +63,14 @@ export const CatalogSection = memo(function CatalogSection() {
 
               <MotionReveal delay={0.1}>
                 <h2 className="mt-5 font-heading text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                  {activeTab === "caballero" ? (
-                    <>
-                      Relojes para caballeros{" "}
-                      <span className="text-[#d4af37]">que marcan la diferencia</span>
-                    </>
-                  ) : (
-                    <>
-                      Relojes para damas{" "}
-                      <span className="text-[#d4af37]">elegancia en cada momento</span>
-                    </>
-                  )}
+                  Relojes para damas y caballeros
+                  <span className="text-[#d4af37]"> que marcan la diferencia</span>
                 </h2>
               </MotionReveal>
 
               <MotionReveal delay={0.15}>
                 <p className="mt-4 max-w-xl text-base leading-7 text-[#f5f0e6]/70 sm:text-lg sm:leading-8">
-                  {activeTab === "caballero"
-                    ? "Cada pieza ha sido seleccionada por su elegancia, calidad y presencia. Explora nuestra colección y encuentra el reloj que refleja tu estilo."
-                    : "Diseños sofisticados y femeninos para la mujer moderna. Encuentra el reloj perfecto que complemente tu estilo único."}
+                  Descubre una colección de relojes exclusivos diseñados para cada estilo y ocasión. Elegancia, calidad y presencia en cada modelo.
                 </p>
               </MotionReveal>
             </div>

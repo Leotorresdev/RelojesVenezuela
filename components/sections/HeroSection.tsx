@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, BadgeCheck, PackageCheck, ShieldCheck, Watch } from "lucide-react";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { HeroSectionProps } from "@/interfaces/Hero";
 import { MotionReveal } from "@/components/ui/MotionReveal";
@@ -14,7 +14,7 @@ const metrics = [
   { label: "Clientes satisfechos", value: "92%", icon: BadgeCheck },
 ] as const;
 
-const IMAGE_TRANSITION_INTERVAL = 2000;
+const IMAGE_TRANSITION_INTERVAL = 3000;
 
 export function HeroSection({
   eyebrow = "Edición Limitada 2026",
@@ -31,10 +31,9 @@ export function HeroSection({
   const prefersReducedMotion = useReducedMotion();
 
   const displayImages = images.length > 0 ? images : imageSrc ? [imageSrc] : [];
-  const shouldAnimateGallery = displayImages.length > 1 && !prefersReducedMotion;
 
   useEffect(() => {
-    if (!shouldAnimateGallery) {
+    if (displayImages.length <= 1) {
       return;
     }
 
@@ -43,7 +42,7 @@ export function HeroSection({
     }, IMAGE_TRANSITION_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [shouldAnimateGallery, displayImages.length]);
+  }, [displayImages.length]);
 
   return (
     <section
@@ -74,7 +73,7 @@ export function HeroSection({
             </div>
           </MotionReveal>
 
-          <MotionReveal delay={0.1}>
+          <MotionReveal delay={0.3}>
             <h1 className="mt-6 max-w-xl font-heading text-5xl font-semibold leading-[0.95] text-white sm:mt-8 sm:text-7xl lg:text-8xl">
               {title}
               <span className="mt-1 block bg-gradient-to-r from-[#d4af37] via-[#e8c65a] to-[#d4af37] bg-clip-text text-transparent">
@@ -83,7 +82,7 @@ export function HeroSection({
             </h1>
           </MotionReveal>
 
-          <MotionReveal delay={0.2}>
+          <MotionReveal delay={0.3}>
             <p className="mt-6 max-w-xl text-base leading-7 text-[#f5f0e6]/75 sm:mt-8 sm:text-lg sm:leading-8">
               {description}
             </p>
@@ -108,7 +107,7 @@ export function HeroSection({
               </a>
               <a
                 href="#catalog"
-                className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.04] px-8 py-4.5 text-center text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f5f0e6] backdrop-blur-sm transition-all hover:border-[#d4af37]/40 hover:bg-[#d4af37]/5 hover:text-[#d4af37] sm:w-auto sm:px-9 sm:text-sm sm:tracking-[0.32em]"
+                className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/4 px-8 py-4.5 text-center text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f5f0e6] backdrop-blur-sm transition-all hover:border-[#d4af37]/40 hover:bg-[#d4af37]/5 hover:text-[#d4af37] sm:w-auto sm:px-9 sm:text-sm sm:tracking-[0.32em]"
               >
                 Explorar colección
               </a>
@@ -148,7 +147,7 @@ export function HeroSection({
               repeatType: "reverse",
               ease: "easeInOut",
             }}
-            className="relative h-full min-h-[600px] overflow-hidden rounded-r-[2.5rem]"
+            className="relative h-full min-h-[320px] sm:min-h-[420px] lg:min-h-[600px] overflow-hidden rounded-[2.5rem] lg:rounded-r-[2.5rem]"
           >
             {displayImages.map((src, index) => (
               <motion.div

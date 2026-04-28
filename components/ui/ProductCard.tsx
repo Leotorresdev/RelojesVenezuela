@@ -109,7 +109,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
               href={productWhatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="group/btn inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-[#f5f0e6]/80 transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37] hover:text-[#1a1a1a]"
+              className="group/btn inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/6 text-[#f5f0e6]/80 transition-all duration-300 hover:border-[#d4af37]/40 hover:bg-[#d4af37] hover:text-[#1a1a1a]"
               aria-label={`Consultar ${product.name}`}
             >
               <ArrowUpRight
