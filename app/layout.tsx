@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next"
 
 import { cn } from "@/lib/utils";
 
@@ -25,6 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={cn("h-full", "antialiased", "font-sans", jost.variable)}>
+        <Analytics />
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
