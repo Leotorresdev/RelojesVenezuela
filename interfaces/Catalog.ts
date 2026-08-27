@@ -4,4 +4,5 @@ export interface CatalogItem {
   price: number;
   originalPrice: number;
   imageUrl: string;
+  variants?: { colorName: string; colorCode: string; imageUrl: string }[];
 }

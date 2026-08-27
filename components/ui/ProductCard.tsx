@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Sparkles } from 'lucide-react';
 
@@ -26,6 +26,7 @@ function calculateDiscount(original: number, current: number): number {
 }
 
 export const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
+  const [currentImage, setCurrentImage] = useState(product.imageUrl);
   const discount = calculateDiscount(product.originalPrice, product.price);
   const productWhatsappUrl = buildWhatsAppUrl(
     `Hola, quiero información del modelo ${product.name} que vi en la landing de Relojes Venezuela.`
@@ -44,7 +45,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
       <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-b from-[#141310] via-[#0f0e0c] to-[#0a0908] shadow-xl transition-all duration-500 group-hover:border-[#d4af37]/30 group-hover:shadow-[0_20px_60px_rgba(212,175,55,0.15)]">
         <div className="relative mx-4 mt-4 aspect-[4/4.5] w-full overflow-hidden rounded-[1.1rem]">
           <Image
-            src={product.imageUrl}
+            src={currentImage}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -69,12 +70,12 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
             </motion.div>
           )}
 
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
             <a
               href={productWhatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="translate-y-4 rounded-full bg-[#d4af37]/95 px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#1a1a1a] backdrop-blur-sm transition-all duration-300 hover:bg-[#d4af37] hover:translate-y-0"
+              className="pointer-events-auto translate-y-4 rounded-full bg-[#d4af37]/95 px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#1a1a1a] backdrop-blur-sm transition-all duration-300 hover:bg-[#d4af37] hover:translate-y-0"
             >
               Consultar
             </a>
@@ -92,6 +93,23 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
           <h3 className="font-heading text-xl font-semibold text-white transition-colors group-hover:text-[#d4af37]">
             {product.name}
           </h3>
+
+          {product.variants && product.variants.length > 0 && (
+            <div className="mt-2 flex items-center gap-2">
+              {product.variants.map((variant, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentImage(variant.imageUrl);
+                  }}
+                  className={`w-5 h-5 rounded-full border-2 transition-transform ${currentImage === variant.imageUrl ? 'border-[#d4af37] scale-125' : 'border-gray-500 hover:border-gray-300'}`}
+                  style={{ backgroundColor: variant.colorCode }}
+                  title={variant.colorName}
+                />
+              ))}
+            </div>
+          )}
 
           <div className="mt-auto flex items-end justify-between pt-3.5">
             <div className="flex flex-col">
