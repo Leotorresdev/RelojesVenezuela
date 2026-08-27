@@ -142,14 +142,14 @@ export const CatalogSection = memo(function CatalogSection() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.2 }}
             className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr"
           >
             {activeProducts.map((product, index) => (
-              <MotionReveal key={product.id} delay={index * 0.05}>
+              <MotionReveal key={product.id} delay={index * 0.03}>
                 <ProductCard product={product} />
               </MotionReveal>
             ))}
