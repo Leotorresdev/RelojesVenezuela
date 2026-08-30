@@ -34,16 +34,13 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
       className="group relative flex h-full"
     >
       <div className="absolute -inset-0.5 rounded-[1.5rem] bg-gradient-to-br from-[#d4af37]/0 via-[#d4af37]/20 to-[#d4af37]/0 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
 
       <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-b from-[#141310] via-[#0f0e0c] to-[#0a0908] shadow-xl transition-all duration-500 group-hover:border-[#d4af37]/30 group-hover:shadow-[0_20px_60px_rgba(212,175,55,0.15)]">
-        <div className="relative mx-4 mt-4 aspect-[4/4.5] w-full overflow-hidden rounded-[1.1rem]">
+        <div className="relative mx-auto mt-4 aspect-[4/4.5] w-[calc(100%-2rem)] overflow-hidden rounded-[1.1rem]">
           <Image
             src={currentImage}
             alt={product.name}

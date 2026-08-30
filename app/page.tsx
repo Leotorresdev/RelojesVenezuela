@@ -20,10 +20,10 @@ export default function Home() {
           ctaLabel="Escríbenos por WhatsApp"
           ctaHref={siteConfig.whatsappUrl}
           images={[
-            "/modelos/caballero/modelo6.jpg",
-            "/modelos/caballero/modelo1.jpg",
-            "/modelos/caballero/modelo2.jpg",
-            "/modelos/caballero/modelo8.jpg",
+            "/hero-1.jpg",
+            "/hero-2.jpg",
+            "/hero-3.jpg",
+            "/hero-4.jpg",
           ]}
           imageAlt="Reloj elegante fotografiado con iluminación premium"
         />
