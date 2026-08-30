@@ -19,6 +19,203 @@ export function buildWhatsAppUrl(message: string) {
 
 export const catalogProductsCaballero: CatalogItem[] = [
   {
+    id: "caballero-curren-8462",
+    name: "Curren 8462",
+    price: 39.00,
+    originalPrice: 49.00,
+    imageUrl: "/curren-8462-green.jpg",
+    variants: [
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/curren-8462-green.jpg" },
+      { colorName: "Gris", colorCode: "#808080", imageUrl: "/curren-8462-grey.jpg" }
+    ]
+  },
+  {
+    id: "caballero-curren-8464",
+    name: "Curren 8464",
+    price: 39.00,
+    originalPrice: 49.00,
+    imageUrl: "/curren-8464-white.jpg",
+    variants: [
+      { colorName: "Blanco", colorCode: "#FFFFFF", imageUrl: "/curren-8464-white.jpg" },
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/curren-8464-black.jpg" }
+    ]
+  },
+  {
+    id: "caballero-curren-8461",
+    name: "Curren 8461",
+    price: 39.00,
+    originalPrice: 49.00,
+    imageUrl: "/curren-8461-black.jpg",
+    variants: [
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/curren-8461-black.jpg" },
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/curren-8461-green.jpg" },
+      { colorName: "Gris", colorCode: "#808080", imageUrl: "/curren-8461-gray.jpg" }
+    ]
+  },
+  {
+    id: "caballero-curren-8467",
+    name: "Curren 8467",
+    price: 34.00,
+    originalPrice: 44.00,
+    imageUrl: "/curren-8467-blue.jpg",
+    variants: [
+      { colorName: "Azul", colorCode: "#1E3A8A", imageUrl: "/curren-8467-blue.jpg" },
+      { colorName: "Blanco", colorCode: "#FFFFFF", imageUrl: "/curren-8467-white.jpg" },
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/curren-8467-black.jpg" },
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/curren-8467-green.jpg" }
+    ]
+  },
+  {
+    id: "caballero-skmei-2423",
+    name: "Skmei 2423",
+    price: 39.00,
+    originalPrice: 49.00,
+    imageUrl: "/skmei-2423-gold.jpg",
+    variants: [
+      { colorName: "Dorado", colorCode: "#D4AF37", imageUrl: "/skmei-2423-gold.jpg" },
+      { colorName: "Plateado", colorCode: "#C0C0C0", imageUrl: "/skmei-2423-silver.jpg" },
+      { colorName: "Plateado-Blanco", colorCode: "#F5F5F5", imageUrl: "/skmei-2423-silver-white.jpg" }
+    ]
+  },
+  {
+    id: "caballero-skmei-2222",
+    name: "Skmei 2222",
+    price: 27.00,
+    originalPrice: 37.00,
+    imageUrl: "/skmei-2222.jpg",
+    variants: []
+  },
+  {
+    id: "caballero-chenxi-949",
+    name: "Chenxi 949",
+    price: 39.00,
+    originalPrice: 49.00,
+    imageUrl: "/chenxi-949.jpg",
+    variants: []
+  },
+  {
+    id: "caballero-curren-8465",
+    name: "Curren 8465",
+    price: 32.00,
+    originalPrice: 42.00,
+    imageUrl: "/curren-8465-blue.jpg",
+    variants: [
+      { colorName: "Azul", colorCode: "#1E3A8A", imageUrl: "/curren-8465-blue.jpg" },
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/curren-8465-green.jpg" },
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/curren-8465-black.jpg" },
+      { colorName: "Gris", colorCode: "#808080", imageUrl: "/curren-8465-grey.jpg" }
+    ]
+  },
+  {
+    id: "caballero-curren-8472",
+    name: "Curren 8472",
+    price: 32.00,
+    originalPrice: 42.00,
+    imageUrl: "/curren-8472-blue.jpg",
+    variants: [
+      { colorName: "Azul", colorCode: "#1E3A8A", imageUrl: "/curren-8472-blue.jpg" },
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/curren-8472-green.jpg" }
+    ]
+  },
+  {
+    id: "caballero-skmei-1990",
+    name: "Skmei 1990",
+    price: 39.00,
+    originalPrice: 49.00,
+    imageUrl: "/skmei-1990.jpg",
+    variants: [
+      { colorName: "Plateado", colorCode: "#C0C0C0", imageUrl: "/skmei-1990.jpg" },
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/skmei-1990-2.jpg" }
+    ]
+  },
+  {
+    id: "caballero-skmei-2382",
+    name: "Skmei 2382",
+    price: 24.80,
+    originalPrice: 34.80,
+    imageUrl: "/skmei-2382-black.jpg",
+    variants: [
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/skmei-2382-black.jpg" },
+      { colorName: "Dorado", colorCode: "#D4AF37", imageUrl: "/skmei-2382-gold.jpg" },
+      { colorName: "Plateado", colorCode: "#C0C0C0", imageUrl: "/skmei-2382-silver.jpg" },
+      { colorName: "Militar", colorCode: "#556B2F", imageUrl: "/skmei-2382-military.jpg" }
+    ]
+  },
+  {
+    id: "caballero-megir-8601",
+    name: "Megir 8601",
+    price: 45.00,
+    originalPrice: 55.00,
+    imageUrl: "/megir-8601-green.jpg",
+    variants: [
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/megir-8601-green.jpg" },
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/megir-8601-black.jpg" },
+      { colorName: "Azul", colorCode: "#1E3A8A", imageUrl: "/megir-8601-blue.jpg" }
+    ]
+  },
+  {
+    id: "caballero-megir-2220",
+    name: "Megir 2220",
+    price: 39.00,
+    originalPrice: 49.00,
+    imageUrl: "/megir-2220-blue.jpg",
+    variants: [
+      { colorName: "Azul", colorCode: "#1E3A8A", imageUrl: "/megir-2220-blue.jpg" },
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/megir-2220-black.jpg" }
+    ]
+  },
+  {
+    id: "caballero-poedagar-926",
+    name: "Poedagar 926",
+    price: 39.00,
+    originalPrice: 49.00,
+    imageUrl: "/poedagar-926-black.jpg",
+    variants: [
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/poedagar-926-black.jpg" },
+      { colorName: "Blanco", colorCode: "#FFFFFF", imageUrl: "/poedagar-926-white.jpg" }
+    ]
+  },
+  {
+    id: "caballero-poedagar-825-3480",
+    name: "Poedagar 825",
+    price: 34.80,
+    originalPrice: 42,
+    imageUrl: "/poedagar-825-white.jpg",
+    variants: [
+      { colorName: "Blanco", colorCode: "#FFFFFF", imageUrl: "/poedagar-825-white.jpg" },
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/poedagar-825-green.jpg" },
+      { colorName: "Dorado/Blanco", colorCode: "#D4AF37", imageUrl: "/poedagar-825-gold-white-new.jpg" },
+      { colorName: "Azul", colorCode: "#1E3A8A", imageUrl: "/poedagar-825-blue.jpg" },
+      { colorName: "Dorado/Negro", colorCode: "#000000", imageUrl: "/poedagar-825-gold-black.jpg" },
+      { colorName: "Negro", colorCode: "#222222", imageUrl: "/poedagar-825-black-new.jpg" },
+      { colorName: "Dorado", colorCode: "#D4AF37", imageUrl: "/poedagar-825-gold.jpg" }
+    ]
+  },
+  {
+    id: "caballero-poedagar-930",
+    name: "Poedagar 930",
+    price: 28.80,
+    originalPrice: 38,
+    imageUrl: "/poedagar-930-white.jpg",
+    variants: [
+      { colorName: "Blanco", colorCode: "#FFFFFF", imageUrl: "/poedagar-930-white.jpg" },
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/poedagar-930-green.jpg" }
+    ]
+  },
+  {
+    id: "caballero-nibosi-2628",
+    name: "Nibosi 2628",
+    price: 39.00,
+    originalPrice: 48,
+    imageUrl: "/nibosi-2628-blue.jpg",
+    variants: [
+      { colorName: "Azul", colorCode: "#1E3A8A", imageUrl: "/nibosi-2628-blue.jpg" },
+      { colorName: "Blanco", colorCode: "#FFFFFF", imageUrl: "/nibosi-2628-white.jpg" },
+      { colorName: "Verde", colorCode: "#008000", imageUrl: "/nibosi-2628-green.jpg" },
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/nibosi-2628-black.jpg" }
+    ]
+  },
+  {
     id: "caballero-curren-8388",
     name: "Curren 8388",
     price: 39.00,
@@ -505,6 +702,66 @@ export const catalogProductsCaballero: CatalogItem[] = [
 ];
 
 export const catalogProductsDamas: CatalogItem[] = [
+  {
+    id: "dama-curren-9079",
+    name: "Curren 9079",
+    price: 29.00,
+    originalPrice: 39.00,
+    imageUrl: "/curren-9079.jpg",
+    variants: []
+  },
+  {
+    id: "dama-curren-9072",
+    name: "Curren 9072",
+    price: 32.00,
+    originalPrice: 42.00,
+    imageUrl: "/curren-9072.jpg",
+    variants: [
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/curren-9072.jpg" },
+      { colorName: "Rosado", colorCode: "#FFC0CB", imageUrl: "/curren-9072-pink.jpg" }
+    ]
+  },
+  {
+    id: "dama-curren-9093",
+    name: "Curren 9093",
+    price: 29.00,
+    originalPrice: 39.00,
+    imageUrl: "/curren-9093.jpg",
+    variants: []
+  },
+  {
+    id: "dama-curren-9067-gold",
+    name: "Curren 9067",
+    price: 29.00,
+    originalPrice: 39.00,
+    imageUrl: "/curren-9067-gold.jpg",
+    variants: [
+      { colorName: "Dorado", colorCode: "#D4AF37", imageUrl: "/curren-9067-gold.jpg" },
+      { colorName: "Oro Rosa", colorCode: "#B76E79", imageUrl: "/curren-9067-gold-pink.jpg" }
+    ]
+  },
+  {
+    id: "dama-curren-9024-black",
+    name: "Curren 9024 Black",
+    price: 29.00,
+    originalPrice: 39.00,
+    imageUrl: "/curren-9024-black.jpg",
+    variants: [
+      { colorName: "Negro", colorCode: "#000000", imageUrl: "/curren-9024-black.jpg" }
+    ]
+  },
+  {
+    id: "dama-curren-9051",
+    name: "Curren 9051",
+    price: 29.00,
+    originalPrice: 39.00,
+    imageUrl: "/curren-9051.jpg",
+    variants: [
+      { colorName: "Dorado", colorCode: "#D4AF37", imageUrl: "/curren-9051.jpg" },
+      { colorName: "Rosado", colorCode: "#FFC0CB", imageUrl: "/curren-9051-pink.jpg" },
+      { colorName: "Azul", colorCode: "#1E3A8A", imageUrl: "/curren-9051-blue.jpg" }
+    ]
+  },
   {
     id: "dama-1",
     name: "Curren 9095",
