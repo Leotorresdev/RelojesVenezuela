@@ -95,7 +95,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
           </h3>
 
           {product.variants && product.variants.length > 0 && (
-            <div className="mt-2 flex items-center gap-2">
+            <div className="mt-2 flex flex-wrap items-center gap-2">
               {product.variants.map((variant, i) => (
                 <button
                   key={i}
@@ -103,7 +103,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
                     e.preventDefault();
                     setCurrentImage(variant.imageUrl);
                   }}
-                  className={`w-5 h-5 rounded-full border-2 transition-transform ${currentImage === variant.imageUrl ? 'border-[#d4af37] scale-125' : 'border-gray-500 hover:border-gray-300'}`}
+                  className={`w-5 h-5 shrink-0 rounded-full border-2 transition-transform ${currentImage === variant.imageUrl ? 'border-[#d4af37] scale-125' : 'border-gray-500 hover:border-gray-300'}`}
                   style={{ backgroundColor: variant.colorCode }}
                   title={variant.colorName}
                 />
