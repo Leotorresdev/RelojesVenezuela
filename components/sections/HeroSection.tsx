@@ -87,9 +87,9 @@ export function HeroSection({
           ))
         )}
 
-        {/* Overlays to ensure text readability */}
+        {/* Overlays to ensure text readability & hide watermark */}
         <div className="absolute inset-0 bg-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-transparent to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-black from-[25%] via-black/80 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/70 via-transparent to-transparent" />
       </div>
 
