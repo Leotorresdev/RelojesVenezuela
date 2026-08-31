@@ -7,5 +7,6 @@ export interface HeroSectionProps {
   ctaHref: string;
   imageSrc?: string;
   images?: string[];
+  videoSrc?: string;
   imageAlt: string;
 }

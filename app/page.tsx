@@ -25,6 +25,7 @@ export default function Home() {
             "/hero-3.jpg",
             "/hero-4.jpg",
           ]}
+          videoSrc="/reloj.mp4"
           imageAlt="Reloj elegante fotografiado con iluminación premium"
         />
 
