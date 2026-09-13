@@ -8,18 +8,27 @@ import { ArrowUpRight, Sparkles } from 'lucide-react';
 import { CatalogItem } from '@/interfaces/Catalog';
 import { buildWhatsAppUrl } from '@/lib/site';
 
-let stockPromise: Promise<Record<string, number>> | null = null;
+type StockData = { total: number; variants: Record<string, number> };
+let stockPromise: Promise<Record<string, StockData>> | null = null;
 function getStockMap() {
   if (!stockPromise) {
-    stockPromise = fetch("https://etvrbadwfobfarwurfzq.supabase.co/rest/v1/relojes?select=modelo,relojes_variantes(stock)", {
+    stockPromise = fetch("https://etvrbadwfobfarwurfzq.supabase.co/rest/v1/relojes?select=modelo,relojes_variantes(color,stock)", {
       headers: { apikey: "sb_publishable_SSyVmBp369I5YxfKgJdA7Q_M8nUI4bE" }
     })
     .then(res => res.ok ? res.json() : [])
     .then(data => {
-      const map: Record<string, number> = {};
+      const map: Record<string, StockData> = {};
       data.forEach((item: any) => {
-        const totalStock = item.relojes_variantes?.reduce((acc: number, v: any) => acc + (v.stock || 0), 0) || 0;
-        map[item.modelo] = totalStock;
+        let total = 0;
+        const variants: Record<string, number> = {};
+        if (item.relojes_variantes) {
+          item.relojes_variantes.forEach((v: any) => {
+            const s = v.stock || 0;
+            total += s;
+            if (v.color) variants[v.color.toLowerCase()] = s;
+          });
+        }
+        map[item.modelo] = { total, variants };
       });
       return map;
     })
@@ -47,16 +56,27 @@ function calculateDiscount(original: number, current: number): number {
 
 export const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
   const [currentImage, setCurrentImage] = useState(product.imageUrl);
-  const [outOfStock, setOutOfStock] = useState(false);
+  const [stockInfo, setStockInfo] = useState<StockData | null>(null);
   const discount = calculateDiscount(product.originalPrice, product.price);
   
   useEffect(() => {
     getStockMap().then(map => {
-      if (map[product.name] === 0) {
-        setOutOfStock(true);
+      if (map[product.name]) {
+        setStockInfo(map[product.name]);
       }
     });
   }, [product.name]);
+
+  const currentVariant = product.variants?.find(v => v.imageUrl === currentImage);
+  
+  let outOfStock = false;
+  if (stockInfo) {
+    if (currentVariant && stockInfo.variants[currentVariant.colorName.toLowerCase()] !== undefined) {
+      outOfStock = stockInfo.variants[currentVariant.colorName.toLowerCase()] === 0;
+    } else {
+      outOfStock = stockInfo.total === 0;
+    }
+  }
 
   const productWhatsappUrl = outOfStock ? "#" : buildWhatsAppUrl(
     `Hola, quiero información del modelo ${product.name} que vi en la landing de Relojes Venezuela.`
