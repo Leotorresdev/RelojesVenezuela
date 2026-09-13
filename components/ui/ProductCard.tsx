@@ -1,12 +1,32 @@
 'use client';
 
 import Image from 'next/image';
-import { memo, useState } from 'react';
+import { memo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Sparkles } from 'lucide-react';
 
 import { CatalogItem } from '@/interfaces/Catalog';
 import { buildWhatsAppUrl } from '@/lib/site';
+
+let stockPromise: Promise<Record<string, number>> | null = null;
+function getStockMap() {
+  if (!stockPromise) {
+    stockPromise = fetch("https://etvrbadwfobfarwurfzq.supabase.co/rest/v1/relojes?select=modelo,relojes_variantes(stock)", {
+      headers: { apikey: "sb_publishable_SSyVmBp369I5YxfKgJdA7Q_M8nUI4bE" }
+    })
+    .then(res => res.ok ? res.json() : [])
+    .then(data => {
+      const map: Record<string, number> = {};
+      data.forEach((item: any) => {
+        const totalStock = item.relojes_variantes?.reduce((acc: number, v: any) => acc + (v.stock || 0), 0) || 0;
+        map[item.modelo] = totalStock;
+      });
+      return map;
+    })
+    .catch(() => ({}));
+  }
+  return stockPromise;
+}
 
 interface ProductCardProps {
   product: CatalogItem;
@@ -27,8 +47,18 @@ function calculateDiscount(original: number, current: number): number {
 
 export const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
   const [currentImage, setCurrentImage] = useState(product.imageUrl);
+  const [outOfStock, setOutOfStock] = useState(false);
   const discount = calculateDiscount(product.originalPrice, product.price);
-  const productWhatsappUrl = buildWhatsAppUrl(
+  
+  useEffect(() => {
+    getStockMap().then(map => {
+      if (map[product.name] === 0) {
+        setOutOfStock(true);
+      }
+    });
+  }, [product.name]);
+
+  const productWhatsappUrl = outOfStock ? "#" : buildWhatsAppUrl(
     `Hola, quiero información del modelo ${product.name} que vi en la landing de Relojes Venezuela.`
   );
 
@@ -53,7 +83,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
 
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0c] via-transparent to-transparent opacity-60" />
 
-          {discount > 0 && (
+          {discount > 0 && !outOfStock && (
             <motion.div
               initial={{ scale: 0, rotate: -10 }}
               animate={{ scale: 1, rotate: 0 }}
@@ -67,7 +97,15 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
             </motion.div>
           )}
 
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
+          {outOfStock && (
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center z-20">
+              <div className="bg-red-600/95 text-white font-bold tracking-[0.2em] uppercase text-xs px-5 py-2 rounded-lg shadow-xl shadow-red-900/50 transform -rotate-6 border border-red-400">
+                Agotado
+              </div>
+            </div>
+          )}
+
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none z-10">
             <a
               href={productWhatsappUrl}
               target="_blank"
