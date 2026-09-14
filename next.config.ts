@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'http2.mlstatic.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'etvrbadwfobfarwurfzq.supabase.co',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 82, 86],

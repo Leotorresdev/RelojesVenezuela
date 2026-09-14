@@ -79,15 +79,18 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
   
   let outOfStock = false;
   let displayPrice = product.price;
+  let displayImage = currentImage; // default to local image
 
   if (stockInfo) {
     if (currentVariant && stockInfo.variants[currentVariant.colorName.toLowerCase()] !== undefined) {
       const variantInfo = stockInfo.variants[currentVariant.colorName.toLowerCase()];
       outOfStock = variantInfo.stock === 0;
       if (variantInfo.price > 0) displayPrice = variantInfo.price;
+      if (variantInfo.image) displayImage = variantInfo.image;
     } else {
       outOfStock = stockInfo.total === 0;
       if (stockInfo.defaultPrice && stockInfo.defaultPrice > 0) displayPrice = stockInfo.defaultPrice;
+      if (stockInfo.defaultImage) displayImage = stockInfo.defaultImage;
     }
   }
 
@@ -108,7 +111,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
       <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-b from-[#141310] via-[#0f0e0c] to-[#0a0908] shadow-xl transition-all duration-500 group-hover:border-[#d4af37]/30 group-hover:shadow-[0_20px_60px_rgba(212,175,55,0.15)]">
         <div className="relative mx-auto mt-4 aspect-[4/4.5] w-[calc(100%-2rem)] overflow-hidden rounded-[1.1rem]">
           <Image
-            src={currentImage}
+            src={displayImage}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
