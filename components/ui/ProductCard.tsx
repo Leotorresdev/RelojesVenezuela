@@ -8,11 +8,15 @@ import { ArrowUpRight, Sparkles } from 'lucide-react';
 import { CatalogItem } from '@/interfaces/Catalog';
 import { buildWhatsAppUrl } from '@/lib/site';
 
-type StockData = { total: number; variants: Record<string, number> };
+type StockData = { 
+  total: number; 
+  variants: Record<string, { stock: number; price: number }>;
+  defaultPrice?: number;
+};
 let stockPromise: Promise<Record<string, StockData>> | null = null;
 function getStockMap() {
   if (!stockPromise) {
-    stockPromise = fetch("https://etvrbadwfobfarwurfzq.supabase.co/rest/v1/relojes?select=modelo,relojes_variantes(color,stock)", {
+    stockPromise = fetch("https://etvrbadwfobfarwurfzq.supabase.co/rest/v1/relojes?select=modelo,relojes_variantes(color,stock,precio)", {
       headers: { apikey: "sb_publishable_SSyVmBp369I5YxfKgJdA7Q_M8nUI4bE" }
     })
     .then(res => res.ok ? res.json() : [])
@@ -20,15 +24,19 @@ function getStockMap() {
       const map: Record<string, StockData> = {};
       data.forEach((item: any) => {
         let total = 0;
-        const variants: Record<string, number> = {};
+        const variants: Record<string, { stock: number; price: number }> = {};
+        let defaultPrice: number | undefined = undefined;
+        
         if (item.relojes_variantes) {
           item.relojes_variantes.forEach((v: any) => {
             const s = v.stock || 0;
+            const p = v.precio || 0;
             total += s;
-            if (v.color) variants[v.color.toLowerCase()] = s;
+            if (v.color) variants[v.color.toLowerCase()] = { stock: s, price: p };
+            if (defaultPrice === undefined) defaultPrice = p;
           });
         }
-        map[item.modelo] = { total, variants };
+        map[item.modelo] = { total, variants, defaultPrice };
       });
       return map;
     })
@@ -70,13 +78,21 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
   const currentVariant = product.variants?.find(v => v.imageUrl === currentImage);
   
   let outOfStock = false;
+  let displayPrice = product.price;
+
   if (stockInfo) {
     if (currentVariant && stockInfo.variants[currentVariant.colorName.toLowerCase()] !== undefined) {
-      outOfStock = stockInfo.variants[currentVariant.colorName.toLowerCase()] === 0;
+      const variantInfo = stockInfo.variants[currentVariant.colorName.toLowerCase()];
+      outOfStock = variantInfo.stock === 0;
+      if (variantInfo.price > 0) displayPrice = variantInfo.price;
     } else {
       outOfStock = stockInfo.total === 0;
+      if (stockInfo.defaultPrice && stockInfo.defaultPrice > 0) displayPrice = stockInfo.defaultPrice;
     }
   }
+
+  // Recalculate discount based on potentially new price
+  const displayDiscount = calculateDiscount(product.originalPrice, displayPrice);
 
   const productWhatsappUrl = outOfStock ? "#" : buildWhatsAppUrl(
     `Hola, quiero información del modelo ${product.name} que vi en la landing de Relojes Venezuela.`
@@ -103,7 +119,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
 
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0c] via-transparent to-transparent opacity-60" />
 
-          {discount > 0 && !outOfStock && (
+          {displayDiscount > 0 && !outOfStock && (
             <motion.div
               initial={{ scale: 0, rotate: -10 }}
               animate={{ scale: 1, rotate: 0 }}
@@ -112,7 +128,7 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
             >
               <Sparkles size={10} className="text-[#1a1a1a]" />
               <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#1a1a1a]">
-                -{discount}%
+                -{displayDiscount}%
               </span>
             </motion.div>
           )}
@@ -168,13 +184,13 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
 
           <div className="mt-auto flex items-end justify-between pt-3.5">
             <div className="flex flex-col">
-              {discount > 0 && (
+              {displayDiscount > 0 && (
                 <span className="text-[14px] font-medium text-[#f5f0e6]/35 line-through">
                   {formatPrice(product.originalPrice)}
                 </span>
               )}
               <span className="font-heading text-2xl font-semibold tracking-tight text-[#d4af37]">
-                {formatPrice(product.price)}
+                {formatPrice(displayPrice)}
               </span>
             </div>
 
